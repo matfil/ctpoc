@@ -6,12 +6,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import Link from "next/link";
 import { useEffect, useState } from "react";
 export default function Home() {
-  let fetchQuote = false;
   const [quote, setQuote] = useState({}as QuoteResponse);
-  if (quote === null){
-    fetchQuote = true;
-  }
-
   let request = undefined;
   
   if (quote == null){

@@ -38,7 +38,7 @@ export default function newAdPage (){
                 type="text"
                 fullWidth
                 variant="outlined"
-                onChange={(e)=>setName(e.target.value)}
+                onChange={(e:any)=>setName(e.target.value)}
                 />
                 <TextField
                 required
@@ -49,7 +49,7 @@ export default function newAdPage (){
                 inputProps={{maxLength: 500}}
                 fullWidth
                 variant="outlined"
-                onChange={(e)=>setContent(e.target.value)}
+                onChange={(e:any)=>setContent(e.target.value)}
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker name="start" label={'Start'} disablePast={true} onChange={(e:any)=>setStart(e.format('MM/DD/YYYY'))}/>
