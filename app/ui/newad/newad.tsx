@@ -6,6 +6,7 @@ import { DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import React from "react";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 export default function NewAd(props:any){
     const [open, setOpen] = React.useState(false);
 

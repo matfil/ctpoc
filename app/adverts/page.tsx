@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 
 export default function Adverts(){
     const ad:AdObject = {id:0,name:'Ad name', content:'text', start: '',end: ''};
-    const [adList, setAdList]=useState([]);
+    const [adList, setAdList]=useState([]as any[]);
     useEffect(()=>{
         setAdList(JSON.parse(window.localStorage.getItem('adList')||''));
      },[]);
