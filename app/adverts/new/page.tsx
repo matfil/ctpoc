@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { useState } from "react";
 
 
-export default function page (){
+export default function NewAdPage (){
     
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
