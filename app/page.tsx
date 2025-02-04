@@ -1,7 +1,39 @@
+'use client'
 import Image from "next/image";
 import styles from "./page.module.css";
-
+import LoginIcon from '@mui/icons-material/Login';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import Link from "next/link";
+import { useEffect, useState } from "react";
 export default function Home() {
+  let fetchQuote = false;
+  const [quote, setQuote] = useState({}as QuoteResponse);
+  if (quote === null){
+    fetchQuote = true;
+  }
+
+  let request = undefined;
+  
+  if (quote == null){
+    request = fetch('https://api.api-ninjas.com/v1/quotes',  {method: 'GET',
+      headers: new Headers({
+          'X-Api-Key': '/Q+q2qqTw5kXXRyBMDZVJA==70drcniO54a7C3NU'
+      })
+    });
+  }
+
+  useEffect( () =>{
+    request = fetch('https://api.api-ninjas.com/v1/quotes',  {method: 'GET',
+      headers: new Headers({
+          'X-Api-Key': '/Q+q2qqTw5kXXRyBMDZVJA==70drcniO54a7C3NU'
+      })
+    }).then((res)=>{res.json().then((data:QuoteResponse[])=>{
+      setQuote ( data[0]);
+    })});
+    ;
+  },[]);
+
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -13,83 +45,42 @@ export default function Home() {
           height={38}
           priority
         />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+            <div>
+              Welcome to Ad management system.
+            </div>
+            <div className={styles.box}>
+              <p className={styles.quote}>{quote.quote||'quote'}</p>
+              <p className={styles.author}>{quote.author||'author'}</p>
+            </div>
+        
 
         <div className={styles.ctas}>
-          <a
+          <Link
             className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/login/"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
+            <LoginIcon/>
+            Log in
+          </Link>
           <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+            href="https://github.com/matfil/ctpoc"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.secondary}
           >
-            Read our docs
+            <GitHubIcon/>
+            Read my code
           </a>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
+}
+
+
+
+interface QuoteResponse {
+  quote:string;
+  author:string;
+  category:string
 }

@@ -88,8 +88,11 @@ a.primary {
 }
 
 a.secondary {
+  float:right;
   border-color: var(--gray-alpha-200);
   min-width: 180px;
+  gap: 8px;
+
 }
 
 .footer {
@@ -165,4 +168,15 @@ a.secondary {
   .logo {
     filter: invert();
   }
+}
+
+.box{
+  max-width: 33vw;
+}
+.author{
+  float:right;
+}
+
+.quote{
+  max-width: 90%;
 }
