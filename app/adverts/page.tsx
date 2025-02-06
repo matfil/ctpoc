@@ -12,13 +12,13 @@ export default function Adverts(){
     const ad:AdObject = {id:0,name:'Ad name', content:'text', start: '',end: ''};
     const [adList, setAdList]=useState([]as any[]);
     useEffect(()=>{
-        setAdList(JSON.parse(window.localStorage.getItem('adList')||''));
+        setAdList(JSON.parse(window.localStorage.getItem('adList')||'[]'));
      },[]);
 
     const handleSave = (value:any) => {
         setAdList(prev => [...prev, value]);
         window.localStorage.setItem('adList', JSON.stringify(adList));
-        console.log('parse',JSON.parse(window.localStorage.getItem('adList')||''));
+        console.log('parse',JSON.parse(window.localStorage.getItem('adList')||'[]'));
         console.log(adList);
     };
     const handleEdit = ()=>{};
