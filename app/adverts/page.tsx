@@ -10,22 +10,21 @@ import { redirect } from "next/navigation";
 
 export default function Adverts(){
     const ad:AdObject = {id:0,name:'Ad name', content:'text', start: '',end: ''};
-    const [adList, setAdList]=useState([]as any[]);
+    const [adList, setAdList]=useState([]as AdObject[]);
+    
     useEffect(()=>{
-        setAdList(JSON.parse(window.localStorage.getItem('adList')||'[]'));
+        setAdList(JSON.parse(window.localStorage.getItem('adList')||'{array:[]}').array);
      },[]);
 
     const handleSave = (value:any) => {
         setAdList(prev => [...prev, value]);
-        window.localStorage.setItem('adList', JSON.stringify(adList));
-        console.log('parse',JSON.parse(window.localStorage.getItem('adList')||'[]'));
-        console.log(adList);
+        window.localStorage.setItem('adList', JSON.stringify({array:adList}));
     };
     const handleEdit = ()=>{};
     const handleDelete  = (index:number)=> {
             adList.splice(index,1);
             setAdList([...adList]);
-            window.localStorage.setItem('adList', JSON.stringify(adList));
+            window.localStorage.setItem('adList', JSON.stringify({array:adList}));
         };
 
     return(<>
@@ -34,7 +33,7 @@ export default function Adverts(){
     <NewAd onSave={handleSave}/>
     
     <Button onClick={()=>{
-        window.localStorage.setItem('adList', JSON.stringify([ad,ad,ad]));
+        window.localStorage.setItem('adList', JSON.stringify({array:[ad,ad,ad]}));
         setAdList([ad,ad,ad]);
     }}>Reset</Button>
 
@@ -43,14 +42,14 @@ export default function Adverts(){
         redirect('/');
     }}>Sign out</Button>
     {
-        adList.map((element:any,index:number)=>{return(
+        adList? adList.map((element:any,index:number)=>{return(
             <ListElement
                 key={index} 
                 adobject={element} 
                 index={index}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}/>
-        )})
+        )}):null
     }
     </>);
 }

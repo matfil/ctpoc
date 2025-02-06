@@ -6,9 +6,6 @@ export function middleware(request:NextRequest){
         if( !token ){
             return NextResponse.redirect('/')
         }
-        else{
-            return new NextResponse();
-        }
       }
 }
 

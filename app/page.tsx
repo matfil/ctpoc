@@ -7,18 +7,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 export default function Home() {
   const [quote, setQuote] = useState({}as QuoteResponse);
-  let request = undefined;
-  
-  if (quote == null){
-    request = fetch('https://api.api-ninjas.com/v1/quotes',  {method: 'GET',
-      headers: new Headers({
-          'X-Api-Key': '/Q+q2qqTw5kXXRyBMDZVJA==70drcniO54a7C3NU'
-      })
-    });
-  }
 
   useEffect( () =>{
-    request = fetch('https://api.api-ninjas.com/v1/quotes',  {method: 'GET',
+    if (!window.localStorage.getItem('adList')){
+      window.localStorage.setItem('adList', JSON.stringify({array:[]}));
+    }
+    const request = fetch('https://api.api-ninjas.com/v1/quotes',  {method: 'GET',
       headers: new Headers({
           'X-Api-Key': '/Q+q2qqTw5kXXRyBMDZVJA==70drcniO54a7C3NU'
       })

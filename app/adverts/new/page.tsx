@@ -18,7 +18,7 @@ export default function NewAdPage (){
         <>
         <Box component='form' onSubmit={(e)=>{
             e.preventDefault();
-            let array = JSON.parse ( window.localStorage.getItem('adList')||'' ) ;
+            let array = JSON.parse ( window.localStorage.getItem('adList')|| '{array:[]}' ).array ;
             array = array ? array: [];
             array.push({
                 name,
@@ -26,7 +26,7 @@ export default function NewAdPage (){
                 start,
                 end
             });
-            window.localStorage.setItem ('adList', JSON.stringify(array));
+            window.localStorage.setItem ('adList', JSON.stringify({array}));
             redirect('/adverts');
         }}>
             <TextField
