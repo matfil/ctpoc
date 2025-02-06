@@ -12,7 +12,12 @@ export default function Adverts(){
     const ad:AdObject = {id:0,name:'Ad name', content:'text', start: '',end: ''};
     const [adList, setAdList]=useState([]as AdObject[]);
     
+    
     useEffect(()=>{
+        const token = window.localStorage.getItem('token');
+        if( token !== 'xyz' ){
+            redirect('/');
+        }
         setAdList(JSON.parse(window.localStorage.getItem('adList')||'{array:[]}').array);
      },[]);
 

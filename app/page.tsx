@@ -5,6 +5,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
 export default function Home() {
   const [quote, setQuote] = useState({}as QuoteResponse);
 
@@ -47,6 +48,12 @@ export default function Home() {
           <Link
             className={styles.primary}
             href="/login/"
+            onClick={()=>{
+              const token = localStorage.getItem('token')
+                      if( token === 'xyz' ){
+                          redirect('/adverts');
+                      }
+            }}
           >
             <LoginIcon/>
             Log in

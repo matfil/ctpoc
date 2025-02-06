@@ -4,15 +4,22 @@ import { Box, Button, TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function NewAdPage (){
-    
+   
     const [name, setName] = useState('');
     const [content, setContent] = useState('');
     const [start, setStart] = useState('');
     const [end, setEnd] = useState('');
+
+    useEffect(()=>{
+        const token = window.localStorage.getItem('token');
+        if( token !== 'xyz' ){
+            redirect('/');
+        }
+    },[]);
 
     return(
         <>
